@@ -4,25 +4,46 @@
 
 (meditations
   "A string is nothing more than text surrounded by double quotes"
-  (= __ "hello")
+  (= "hello" "hello")
 
   "But double quotes are just magic on top of something deeper"
-  (= __ (str 'world))
+  (= "world" (str 'world))
 
   "You can do more than create strings, you can put them together"
-  (= "Cool right?" (str __ __))
+  (= "Cool right?" (str "Cool" " right?"))
+  ; pay attention to the white space
 
   "You can even get certain characters"
-  (= \C (get "Characters" __))
+  (= \C (get "Characters" 0))
+  ; get returns a value mapped to key, not-found or nil if not present. So to get \C we have to pass in the index 0.
+  ; koan-engine.runner=> (get "asd" 0)
+  ; \a
+  ; koan-engine.runner=> (get "asd" 1)
+  ; \s
+  ; koan-engine.runner=> (get "asd" -1)
+  ; nil
+  ; koan-engine.runner=> (get "asd" -1 \X)
+  ; \X
+  ; (get [1 2 3] 1)
+  ; 2
+  ; (get {:a 1 :b 2} :b)
+  ; 2
 
   "Or even count the characters"
-  (= __ (count "Hello World"))
+  (= 11 (count "Hello World"))
 
   "But strings and characters are not the same"
-  (= __ (= \c "c"))
+  (= false (= \c "c"))
+  ; koan-engine.runner=> (type \q)
+  ; java.lang.Character
+  ; koan-engine.runner=> (type "q")
+  ; java.lang.String
 
   "What if you only wanted to get part of a string?"
-  (= "World" (subs "Hello World" __ __))
+  (= "World" (subs "Hello World" 6 11))
+  ; (subs s start) (subs s start end)
+  ; Returns the substring of s beginning at start inclusive, and ending
+  ; at end (defaults to length of string), exclusive.
 
   "How about joining together elements in a list?"
   (= __ (string/join '(1 2 3)))
