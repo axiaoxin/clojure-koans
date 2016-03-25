@@ -32,7 +32,7 @@
   ;;=> ([1 2] 4 5 6)
 
   "Conjoining an element to a list isn't hard either"
-  (= '(:a :b :c :d :e) (conj '(:a :b :c :d) :e))
+  (= '(:e :a :b :c :d) (conj '(:a :b :c :d) :e))
   ;; notice that conjoining to a vector is done at the end
   ; (conj [1 2 3] 4)
   ;;=> [1 2 3 4]
@@ -73,19 +73,19 @@
   ;;=> (4 3)
 
   "You can use a list like a stack to get the first element"
-  (= __ (peek '(:a :b :c :d :e)))
+  (= :a (peek '(:a :b :c :d :e)))
 
   "Or the others"
-  (= __ (pop '(:a :b :c :d :e)))
+  (= '(:b :c :d :e) (pop '(:a :b :c :d :e)))
 
   "But watch out if you try to pop nothing"
-  (= __ (try
+  (= "No dice!" (try
           (pop '())
           (catch IllegalStateException e
             "No dice!")))
 
   "The rest of nothing isn't so strict"
-  (= __ (try
+  (= '() (try
           (rest '())
           (catch IllegalStateException e
             "No dice!"))))
