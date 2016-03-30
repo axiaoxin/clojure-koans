@@ -37,7 +37,7 @@
   (= false (contains? {:a nil :b nil} :c))
 
   "Maps are immutable, but you can create a new and improved version"
-  (= {1 "January" 2 __} (assoc {1 "January"} 2 "February"))
+  (= {1 "January" 2 "February"} (assoc {1 "January"} 2 "February"))
   ; assoc 表示 associate 的意思。
   ; assoc 接受一个 Map ，还有一个或多个 key-val 对， 返回一个和传入 Map 类型相同的新 Map ， 除了原来传入 Map 已有的数据外， 新 Map 还包含传给 assoc 的那些 key-val 对。
   ; 当一个向量被应用到 assoc 函数时， 返回一个新向量， 新向量的索引下标（index） key 的值就是 val 。
@@ -55,12 +55,12 @@
   ; (PersistentVector.java:136)
 
   "You can also create a new version with an entry removed"
-  (= {__ __} (dissoc {1 "January" 2 "February"} 2))
+  (= {1 "January"} (dissoc {1 "January" 2 "February"} 2))
 
   "Often you will need to get the keys, but the order is undependable"
-  (= (list __ __ __)
+  (= (list 2010 2014 2018)
      (sort (keys { 2014 "Sochi" 2018 "PyeongChang" 2010 "Vancouver"})))
 
   "You can get the values in a similar way"
-  (= (list __ __ __)
+  (= (list "PyeongChang" "Sochi" "Vancouver")
      (sort (vals {2010 "Vancouver" 2014 "Sochi" 2018 "PyeongChang"}))))
