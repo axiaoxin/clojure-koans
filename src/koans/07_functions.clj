@@ -8,16 +8,18 @@
 
 (meditations
   "Calling a function is like giving it a hug with parentheses"
-  (= __ (square 9))
+  (= 81 (square 9))
 
   "Functions are usually defined before they are used"
-  (= __ (multiply-by-ten 2))
+  (= 20 (multiply-by-ten 2))
 
   "But they can also be defined inline"
-  (= __ ((fn [n] (* 5 n)) 2))
+  (= 10 ((fn [n] (* 5 n)) 2))
 
   "Or using an even shorter syntax"
   (= __ (#(* 15 %) 4))
+  ; These are anonymous functions. The hash and parenthesizes will denote an anonymous function.
+  ; Anywhere you see a percentages sign, they are the passed in values.
 
   "Even anonymous functions may take multiple arguments"
   (= __ (#(+ %1 %2 %3) 4 5 6))
