@@ -17,18 +17,19 @@
   (= 10 ((fn [n] (* 5 n)) 2))
 
   "Or using an even shorter syntax"
-  (= __ (#(* 15 %) 4))
+  (= 60 (#(* 15 %) 4))
   ; These are anonymous functions. The hash and parenthesizes will denote an anonymous function.
   ; Anywhere you see a percentages sign, they are the passed in values.
 
   "Even anonymous functions may take multiple arguments"
-  (= __ (#(+ %1 %2 %3) 4 5 6))
+  (= 15 (#(+ %1 %2 %3) 4 5 6))
 
   "Arguments can also be skipped"
-  (= __ (#(* 15 %2) 1 2))
+  (= 30 (#(* 15 %2) 1 2))
 
   "One function can beget another"
-  (= 9 (((fn [] ___)) 4 5))
+  (= 9 (((fn [] #(+ % %2))) 4 5))
+  ; magic
 
   "Functions can also take other functions as input"
   (= 20 ((fn [f] (f 4 5))
