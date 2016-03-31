@@ -29,6 +29,9 @@
 
   "One function can beget another"
   (= 9 (((fn [] #(+ % %2))) 4 5))
+  ;    ^^^定义一个返回值为匿名函数的匿名函数
+  ;    ||执行外层的匿名函数，返回#()定义的匿名函数
+  ;    |执行返回的那个匿名函数 并传递4 5两个参数
   ; magic
 
   "Functions can also take other functions as input"
