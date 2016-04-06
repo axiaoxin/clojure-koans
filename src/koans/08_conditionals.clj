@@ -10,28 +10,34 @@
 
 (meditations
   "You will face many decisions"
-  (= __ (if (false? (= 4 5))
+  (= :a (if (false? (= 4 5))
           :a
           :b))
 
   "Some of them leave you no alternative"
-  (= __ (if (> 4 3)
+  (= [] (if (> 4 3)
           []))
 
   "And in such a situation you may have nothing"
-  (= __ (if (nil? 0)
+  (= nil (if (nil? 0)
           [:a :b :c]))
 
   "In others your alternative may be interesting"
   (= :glory (if (not (empty? ()))
               :doom
-              __))
+              :glory))
 
   "You may have a multitude of possible paths"
   (let [x 5]
-    (= :your-road (cond (= x __) :road-not-taken
-                        (= x __) :another-road-not-taken
-                        :else __)))
+    (= :your-road (cond (= x 2) :road-not-taken
+                        (= x 3) :another-road-not-taken
+                        :else :your-road)))
+  ; :else is not special. any non-nil or true will work.
+  ; koan-engine.runner=> (let [x 5] (cond (= x 2) :road-not-token (= x 3) :another-road-not-taken :666 :your-road))
+  ; :your-road
+  ; koan-engine.runner=> (let [x 5] (cond (= x 2) :road-not-token (= x 3) :another-road-not-taken :default :your-road))
+  ; :your-road
+
 
   "Or your fate may be sealed"
   (= 'doom (if-not (zero? __)
