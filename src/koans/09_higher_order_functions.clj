@@ -3,31 +3,42 @@
 
 (meditations
   "The map function relates a sequence to another"
-  (= [__ __ __] (map (fn [x] (* 4 x)) [1 2 3]))
+  (= [4 8 12] (map (fn [x] (* 4 x)) [1 2 3]))
 
   "You may create that mapping"
-  (= [1 4 9 16 25] (map (fn [x] __) [1 2 3 4 5]))
+  (= [1 4 9 16 25] (map (fn [x] (* x x)) [1 2 3 4 5]))
 
   "Or use the names of existing functions"
-  (= __ (map nil? [:a :b nil :c :d]))
+  (= [false false true false false] (map nil? [:a :b nil :c :d]))
 
   "A filter can be strong"
-  (= __ (filter (fn [x] false) '(:anything :goes :here)))
+  (= '() (filter (fn [x] false) '(:anything :goes :here)))
 
   "Or very weak"
-  (= __ (filter (fn [x] true) '(:anything :goes :here)))
+  (= '(:anything :goes :here) (filter (fn [x] true) '(:anything :goes :here)))
 
   "Or somewhere in between"
-  (= [10 20 30] (filter (fn [x] __) [10 20 30 40 50 60 70 80]))
+  (= [10 20 30] (filter (fn [x] (<= x 30)) [10 20 30 40 50 60 70 80]))
 
   "Maps and filters may be combined"
-  (= [10 20 30] (map (fn [x] __) (filter (fn [x] __) [1 2 3 4 5 6 7 8])))
+  (= [10 20 30] (map (fn [x] (* x 10)) (filter (fn [x] (< x 4)) [1 2 3 4 5 6 7 8])))
 
   "Reducing can increase the result"
-  (= __ (reduce (fn [a b] (* a b)) [1 2 3 4]))
+  (= 24 (reduce (fn [a b] (* a b)) [1 2 3 4]))
 
   "You can start somewhere else"
-  (= 2400 (reduce (fn [a b] (* a b)) __ [1 2 3 4]))
+  (= 2400 (reduce (fn [a b] (* a b)) 100 [1 2 3 4]))
+  ; clojure.core/reduce
+  ; ([f coll] [f val coll])
+  ;   f should be a function of 2 arguments. If val is not supplied,
+  ;   returns the result of applying f to the first 2 items in coll, then
+  ;   applying f to that result and the 3rd item, etc. If coll contains no
+  ;   items, f must accept no arguments as well, and reduce returns the
+  ;   result of calling f with no arguments.  If coll has only 1 item, it
+  ;   is returned and f is not called.  If val is supplied, returns the
+  ;   result of applying f to val and the first item in coll, then
+  ;   applying f to that result and the 2nd item, etc. If coll contains no
+  ;   items, returns val and f is not called.
 
   "Numbers are not the only things one can reduce"
   (= "longest" (reduce (fn [a b]
