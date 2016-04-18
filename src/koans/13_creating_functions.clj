@@ -30,18 +30,20 @@
   ; 70
 
   "Don't forget: first things first"
-  (= [__ __ __ __]
+  (= [:a :b :c :d]
        (let [ab-adder (partial concat [:a :b])]
-         (ab-adder [__ __])))
+         (ab-adder [:c :d])))
 
   "Functions can join forces as one 'composed' function"
   (= 25 (let [inc-and-square (comp square inc)]
-          (inc-and-square __)))
+          (inc-and-square 4)))
+  ; 组合函数comp： 形如   ((comp f1 f2 .. fn) arg1 arg2 .. argn)
+  ; 就是对参数从右到左组合执行所有函数，可以转变为： (f1 (f2 (.. (fn arg1 arg2 .. argn))))
 
   "Have a go on a double dec-er"
-  (= __ (let [double-dec (comp dec dec)]
+  (= 8 (let [double-dec (comp dec dec)]
           (double-dec 10)))
 
   "Be careful about the order in which you mix your functions"
-  (= 99 (let [square-and-dec ___]
+  (= 99 (let [square-and-dec (comp dec square)]
           (square-and-dec 10))))
