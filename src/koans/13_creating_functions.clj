@@ -5,8 +5,15 @@
 
 (meditations
   "One may know what they seek by knowing what they do not seek"
-  (= [__ __ __] (let [not-a-symbol? (complement symbol?)]
+  (= [true false true] (let [not-a-symbol? (complement symbol?)]
                   (map not-a-symbol? [:a 'b "c"])))
+  ; (complement f)
+  ; Takes a fn f and returns a fn that takes the same arguments as f,
+  ; has the same effects, if any, and returns the **opposite** truth value.
+  ; koan-engine.runner=> (not (zero? 0))
+  ; false
+  ; koan-engine.runner=> ((complement zero?) 0)
+  ; false
 
   "Praise and 'complement' may help you separate the wheat from the chaff"
   (= [:wheat "wheat" 'wheat]
