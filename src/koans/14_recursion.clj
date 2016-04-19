@@ -3,8 +3,8 @@
 
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
 (defn is-even-bigint? [n]
   (loop [n   n
@@ -12,6 +12,7 @@
     (if (= n 0)
       __
       (recur (dec n) (not acc)))))
+; loop/recur 组合把一个看似递归的调用变成一个迭代 — 迭代不需要占用栈空间
 
 (defn recursive-reverse [coll]
   __)
