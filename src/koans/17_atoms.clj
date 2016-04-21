@@ -1,6 +1,9 @@
 (ns koans.17-atoms
   (:require [koan-engine.core :refer :all]))
 
+; http://stackoverflow.com/questions/9132346/clojure-differences-between-ref-var-agent-atom-with-examples
+; atom 只有一个Identity操作 ref可以有多个Identity操作
+
 (def atomic-clock (atom 0))
 
 (meditations
