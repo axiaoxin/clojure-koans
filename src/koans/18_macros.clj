@@ -3,6 +3,12 @@
 
 ; http://www.isnowfy.com/clojure-macro/
 
+; defmacro的作用就是在代码编译的时候，会把defmacro当作是函数运行一次，并且把这个的返回结果替换到原有的位置上去
+; `表示syntax quote，'表示quote，~表示unquote，~@表示unquote splicing。
+; 如果某段代码前面加了'就表示这段代码被quote而不会去求值了，而`的syntax quote则表示会把相应的变量变成有namespace的形式
+; ~和`是搭配使用的，~必须在`的后面，并且~的数量不能超过`的数量，~是用来将变量的值替换到相应位置
+; 而~@的作用和~类似，不过~@不但会替换掉值并且会把值打撒。
+
 (defmacro hello [x]
   (str "Hello, " x))
 
