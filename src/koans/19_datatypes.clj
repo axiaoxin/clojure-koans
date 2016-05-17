@@ -1,6 +1,9 @@
 (ns koans.19-datatypes
   (:require [koan-engine.core :refer :all]))
 
+; Clojure Tip: defstruct, deftype, defrecord
+; http://www.thejach.com/view/2011/09/clojure_tip_defstruct_deftype_defrecord
+
 (defrecord Nobel [prize])
 (deftype Pulitzer [prize])
 
@@ -22,7 +25,7 @@
 
 (meditations
   "Holding records is meaningful only when the record is worthy of you"
-  (= __ (.prize (Nobel. "peace")))
+  (= "peace" (.prize (Nobel. "peace")))
 
   "Types are quite similar"
   (= __ (.prize (Pulitzer. "literature")))
