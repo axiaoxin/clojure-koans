@@ -17,6 +17,13 @@
 
   "Or more succinctly with a reader macro"
   (= {:division "West"} (meta '^{:division "West"} Giants))
+  ;;; Metadata Reader Macros
+  ; ^{:doc "How obj works!"} obj - Sets the metadata of obj to the provided map.
+  ; Equivalent to (with-meta obj {:doc "How obj works!"})
+  ; ^:dynamic obj - Sets the given keyword to true in the object’s metadata.
+  ; Equivalent to ^{:dynamic true} obj
+  ; ^String obj - Sets the value of :tag key in the object’s metadata.
+  ; Equivalent to ^{:tag java.lang.String} obj
 
   "While others can't"
   (= "This doesn't implement the IObj interface"
