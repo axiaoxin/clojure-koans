@@ -5,6 +5,12 @@
   (with-meta 'Giants
     {:league "National League"}))
 
+; (with-meta obj m)
+; Returns an object of the same type and value as obj, with map m as its metadata.
+
+; (meta obj)
+; Returns the metadata of obj, returns nil if there is no metadata.
+
 (meditations
   "Some objects can be tagged using the with-meta function"
   (= __ (meta giants))
