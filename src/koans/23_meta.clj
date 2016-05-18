@@ -13,19 +13,25 @@
 
 (meditations
   "Some objects can be tagged using the with-meta function"
-  (= __ (meta giants))
+  (= {:league "National League"} (meta giants))
 
   "Or more succinctly with a reader macro"
-  (= __ (meta '^{:division "West"} Giants))
+  (= {:division "West"} (meta '^{:division "West"} Giants))
 
   "While others can't"
-  (= __ (try
+  (= "This doesn't implement the IObj interface"
+     (try
           (with-meta
             2
             {:prime true})
           (catch ClassCastException e
             "This doesn't implement the IObj interface")))
 
+  ; (merge {:a 1 :b 2 :c 3} {:b 9 :d 4})
+  ; ;;=> {:d 4, :a 1, :b 9, :c 3}
+  ; (merge {:a 1} nil)   ;=> {:a 1}
+  ; (merge nil {:a 1})   ;=> {:a 1}
+  ; (merge nil nil)      ;=> nil
   "Notice when metadata carries over"
   (= __ (meta (merge '^{:foo :bar} {:a 1 :b 2}
                      {:b 3 :c 4})))
