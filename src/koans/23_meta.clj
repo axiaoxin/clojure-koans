@@ -40,31 +40,57 @@
   ; (merge nil {:a 1})   ;=> {:a 1}
   ; (merge nil nil)      ;=> nil
   "Notice when metadata carries over"
-  (= __ (meta (merge '^{:foo :bar} {:a 1 :b 2}
+  (= {:foo :bar} (meta (merge '^{:foo :bar} {:a 1 :b 2}
                      {:b 3 :c 4})))
 
-  "And when it doesn't"
-  (= __ (meta (merge {:a 1 :b 2}
+  "And when it doesn't"  ;;; Zzzz
+  (= nil (meta (merge {:a 1 :b 2}
                      '^{:foo :bar} {:b 3 :c 4})))
 
   "Metadata can be used as a type hint to avoid reflection during runtime"
-  (= __ (#(.charAt ^String % 0) "Cast me"))
+  (= \C (#(.charAt ^String % 0) "Cast me"))
 
   "You can directly update an object's metadata"
   (= 8 (let [giants
              (with-meta
                'Giants
                {:world-series-titles (atom 7)})]
-         (swap! (:world-series-titles (meta giants)) __)
+         (swap! (:world-series-titles (meta giants)) inc)
          @(:world-series-titles (meta giants))))
 
   "You can also create a new object from another object with metadata"
   (= {:league "National League" :park "AT&T Park"}
      (meta (vary-meta giants
-                      assoc __ __)))
+                      assoc :park "AT&T Park")))
+  ; (vary-meta obj f & args)
+  ; Returns an object of the same type and value as obj, with
+  ; (apply f (meta obj) args) as its metadata.
 
-  "But it won't affect behavior like equality"
-  (= __ (vary-meta giants dissoc :league))
+  "But it won't affect behavior like equality"  ;;; Zzzz why not {}
+  (= 'Giants (vary-meta giants dissoc :league))
 
   "Or the object's printed representation"
-  (= __ (pr-str (vary-meta giants dissoc :league))))
+  (= "Giants" (pr-str (vary-meta giants dissoc :league))))
+  ; (pr-str & xs)
+  ; pr to a string, returning it
+  ; user=> (def x [1 2 3 4 5])
+  ; #'user/x
+  ; user=> x
+  ; [1 2 3 4 5]
+
+  ; ;; Turn that data into a string...
+  ; user=> (pr-str x)
+  ; "[1 2 3 4 5]"
+
+  ; ;; ...and turn that string back into data!
+  ; user=> (read-string (pr-str x))
+  ; [1 2 3 4 5]
+
+  ; ;; you can think of pr-str as the inverse of read-string
+  ; ;; turn string into symbols
+  ; user=> (read-string "(a b foo :bar)")
+  ; (a b foo :bar)
+
+  ; ;;turn symbols into a string
+  ; user=> (pr-str '(a b foo :bar))
+  ; "(a b foo :bar)"
