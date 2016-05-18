@@ -1,6 +1,24 @@
 (ns koans.22-group-by
   (:require [koan-engine.core :refer :all]))
 
+;;; group-by demo
+; ;; group strings by their length
+; (group-by count ["a" "as" "asd" "aa" "asdf" "qwer"])
+; ;;=> {1 ["a"], 2 ["as" "aa"], 3 ["asd"], 4 ["asdf" "qwer"]}
+
+; ;; group integers by a predicate
+; (group-by odd? (range 10))
+; ;;=> {false [0 2 4 6 8], true [1 3 5 7 9]}
+
+; ;; group by a primary key
+; (group-by :user-id [{:user-id 1 :uri "/"}
+;                     {:user-id 2 :uri "/foo"}
+;                     {:user-id 1 :uri "/account"}])
+
+; ;;=> {1 [{:user-id 1, :uri "/"}
+; ;;       {:user-id 1, :uri "/account"}],
+; ;;    2 [{:user-id 2, :uri "/foo"}]}
+
 (defn get-odds-and-evens [coll]
   (let [{odds true evens false} (group-by __ coll)]
     [odds evens]))
