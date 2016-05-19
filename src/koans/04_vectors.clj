@@ -3,31 +3,36 @@
 
 (meditations
   "You can use vectors in clojure as array-like structures"
-  (= __ (count [42]))
+  (= 1 (count [42]))
 
   "You can create a vector from a list"
-  (= __ (vec '(1)))
+  (= [1] (vec '(1)))
 
   "Or from some elements"
-  (= __ (vector nil nil))
+  (= [nil nil] (vector nil nil))
+  ; vec接收一个单独的参数，可能是任何Clojure或Java的数据类型，然后将其元素的值作为参数组成一个新的向量
+  ; vector接收任意数量的参数并将它们的值组成一个Vector
 
   "But you can populate it with any number of elements at once"
-  (= [1 __] (vec '(1 2)))
+  (= [1 2] (vec '(1 2)))
 
   "Conjoining to a vector is different than to a list"
-  (= __ (conj [111 222] 333))
+  (= [111 222 333] (conj [111 222] 333))
 
   "You can get the first element of a vector like so"
-  (= __ (first [:peanut :butter :and :jelly]))
+  (= :peanut (first [:peanut :butter :and :jelly]))
 
   "And the last in a similar fashion"
-  (= __ (last [:peanut :butter :and :jelly]))
+  (= :jelly (last [:peanut :butter :and :jelly]))
 
   "Or any index if you wish"
-  (= __ (nth [:peanut :butter :and :jelly] 3))
+  (= :jelly (nth [:peanut :butter :and :jelly] 3))
 
   "You can also slice a vector"
-  (= __ (subvec [:peanut :butter :and :jelly] 1 3))
+  (= [:butter :and] (subvec [:peanut :butter :and :jelly] 1 3))
 
   "Equality with collections is in terms of values"
-  (= (list 1 2 3) (vector 1 2 __)))
+  (= (list 1 2 3) (vector 1 2 3)))
+  ; !!! Equality with collections is in terms of values"
+  ; how2 convert a vector to a list???
+  ; (map identity [1 2 3])

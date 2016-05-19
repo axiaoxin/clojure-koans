@@ -3,21 +3,27 @@
 
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
+; 不懂！！！
 (defn is-even-bigint? [n]
   (loop [n   n
          acc true]
     (if (= n 0)
-      __
+      acc
       (recur (dec n) (not acc)))))
+; loop/recur 组合把一个看似递归的调用变成一个迭代 — 迭代不需要占用栈空间
 
 (defn recursive-reverse [coll]
-  __)
+  (reduce conj '() coll))
 
 (defn factorial [n]
-  __)
+  (loop [n n
+         acc 1]
+    (if (= n 1)
+      acc
+      (recur (dec n) (* acc n)))))
 
 (meditations
   "Recursion ends with a base case"
